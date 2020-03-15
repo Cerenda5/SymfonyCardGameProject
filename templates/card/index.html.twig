@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CardController!{% endblock %}
+
+{% block body %}
+    <div class="form">
+        <h1>Card Form</h1>
+        {{ form_start(form, {'action' : path(app.request.attributes.get('_route')), 'method': 'POST'}) }}
+        {{ form_widget(form) }}
+        {{ form_end(form) }}
+    </div>
+    <br>
+    <table class="table">
+    {% for card in cards %}
+        <div class="card">
+            <div class="cardHeader">
+                <span> </span>
+                <span>  </span>
+            </div>
+            <div class="cardImage" style="background-image: url({{ asset('uploads/') }}{{ card.image }});"></div>
+            <div class="cardFooter">
+                <div class="cardNumber" style="color:blue"> {{ card.life }} </div>
+                {% if card.faction %}
+                    {{ card.Faction.factionName }}
+                {% endif %}
+                <div class="cardNumber" style="color:red"> {{ card.attack }} </div>
+            </div>
+        </div>
+    {% endfor %}
+    </table>
+{% endblock %}

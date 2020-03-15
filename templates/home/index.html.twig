@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+
+{% block body %}
+    {% include "layout/navbar.html.twig" %}
+    <div id="pageContent">
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('nav a').click(function (e) {
+                e.preventDefault();
+                $('nav a').removeClass('active');
+                $(this).addClass('active');
+                $("#pageContent").load($(this).attr('href'));
+            })
+        });
+
+        $('#pageContent').on('submit', 'form', function (e) {
+            e.preventDefault();
+            var form = $(this);
+            $.ajax({
+                type: "POST",
+                url: form.attr('action'),
+                data: new FormData(this),
+                contentType:false,
+                processData: false,
+                success: function success(response) {
+                    $("#pageContent").load($('.active').attr('href'));
+                    alert('Added To DataBase');
+                }
+            })
+        });
+    </script>
+{% endblock %}

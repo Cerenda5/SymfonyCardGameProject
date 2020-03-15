@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello FactionController!{% endblock %}
+
+{% block body %}
+    <h1>Faction Form</h1>
+    {{ form_start(form, {'action' : path(app.request.attributes.get('_route')), 'method': 'POST'}) }}
+    {{ form_widget(form) }}
+    {{ form_end(form) }}
+
+    <table class="table">
+    <thead>
+    <tr>
+        <th>Faction Name</th>
+    </tr>
+    </thead>
+    <td>
+    {% for faction in factions %}
+        {{ faction.factionName }}<br>
+    {% endfor %}
+    </td>
+{% endblock %}
